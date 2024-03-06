@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+node "Raspberry PI 3B" as RPI {
+    component "eth0" as RPIETH
+    component "wlan0mon" as WIFIMON
+    component "nzyme-tap" as TAP
+}
+
+node "Ubuntu 20.04" as UBUNTU {
+    component "eth0" as UBUNTUETH
+    component "nzyme-node" as NODE
+}
+WIFIMON --> TAP
+RPIETH <--> UBUNTUETH : 192.168.1.0/24
+TAP --> NODE
+@enduml
