@@ -51,10 +51,11 @@ jobs:
               ls -hatlr
               cd libpcap-1.9.1
               cat debian/control
-              apt-get build-dep .
+              apt-get build-dep -y .
               dpkg-buildpackage -uc -us -b
               cd ..
               ls -ahltr
+              dpkg -i libpcap0.8_1.9.1-3_*.deb
               ;;
           esac
         run: |
