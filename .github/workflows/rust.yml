@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      name: Checkout Nzyme
+      with:
+        name: https://github.com/nzymedefense/nzyme.git
     - name: Build
       run: cd tap ; cargo build --verbose -r
     - name: Run tests
