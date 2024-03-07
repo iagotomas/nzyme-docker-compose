@@ -41,13 +41,19 @@ jobs:
           --volume "${PWD}:/nzyme"
         install: |
           apt-get update -q -y
-          apt-get install -y libpcap0.8 cargo openssl librust-openssl-dev
+          apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
+          mkdir -p source/libpcap/source
+          cd source/libpcap/source
+          apt-get source libpcap0.8
+          ls -hatlr
+          cd libpcap-1.10.0
+          cat debian/control
         run: |
           pwd
           ls -ahltr
           cd /nzyme/tap
           cargo build --verbose -r
-    - name: Upload nzyme-tap
+    - name: Upload nzyme-tap ${{ matrix.distro }} ${{ matrix.arch }}
       uses: actions/upload-artifact@v4
       with:
         name: nzyme-tap-${{ matrix.arch }}-${{ matrix.distro }}
