@@ -43,7 +43,6 @@ jobs:
           case "${{ matrix.arch }}" in
             armv7*)
               echo "deb-src https://deb.debian.org/debian buster main contrib non-free" > /etc/apt/sources.list.d/debian-src.list
-              apt-key update -y
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
               mkdir -p source/libpcap/source
