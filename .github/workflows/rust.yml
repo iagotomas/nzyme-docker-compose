@@ -18,7 +18,7 @@ jobs:
       with:
         repository: nzymedefense/nzyme
     - name: Install libpcap
-      run: sudo apt install libpcap
+      run: sudo apt install libpcap0.8 libpcap0.8-dev
     - name: Build
       run: |
         ls -ahltr
