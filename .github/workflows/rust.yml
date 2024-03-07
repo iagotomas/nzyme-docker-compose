@@ -19,6 +19,8 @@ jobs:
       name: Checkout Nzyme
       with:
         repository: nzymedefense/nzyme
+    - name: Install libpcap
+      run: apt install libpcap0.8
     - name: Build
       run: ls -ahltr;cd tap ; cargo build --verbose -r
     - name: Run tests

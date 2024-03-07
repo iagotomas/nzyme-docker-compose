@@ -1,16 +1,24 @@
 @startuml
 left to right direction
+cloud "Wifi" as WIFI {
+
+}
 node "Raspberry PI 3B" as RPI {
     component "eth0" as RPIETH
     component "wlan0mon" as WIFIMON
     component "nzyme-tap" as TAP
 }
+cloud "Internet" as INTERNET {
 
+}
 node "Ubuntu 20.04" as UBUNTU {
     component "eth0" as UBUNTUETH
+    component "eth1" as ETH1
     component "nzyme-node" as NODE
 }
+WIFI --> WIFIMON
 WIFIMON --> TAP
 RPIETH <--> UBUNTUETH : 192.168.1.0/24
 TAP --> NODE
+ETH1 --> INTERNET
 @enduml
