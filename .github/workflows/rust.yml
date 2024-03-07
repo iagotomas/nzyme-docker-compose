@@ -24,6 +24,9 @@ jobs:
         wget https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz 
         tar -xzvf libpcap-1.10.4.tar.gz
     - name: Build
-      run: ls -ahltr;cd tap ; LIBPCAP_LIBDIR=../ cargo build --features static --verbose -r
+      run: |
+        ls -ahltr
+        cd tap 
+        LIBPCAP_LIBDIR="../libpcap-1.10.4" cargo build --features static --verbose -r
     - name: Run tests
       run: cd tap ; cargo test --verbose
