@@ -41,7 +41,7 @@ jobs:
           --volume "${PWD}:/nzyme"
         install: |
           apt-get update -q -y
-          apt-get install -y libpcap0.8 cargo openssl openssl-dev
+          apt-get install -y libpcap0.8 cargo openssl librust-openssl-dev
         run: |
           pwd
           ls -ahltr
