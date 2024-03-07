@@ -27,7 +27,8 @@ jobs:
         dockerRunArgs: |
           --volume "${PWD}:/nzyme"
         install: |
-          apt install libpcap0.8
+          apt-get update -q -y
+          apt-get install -y libpcap0.8
         run: |
           pwd
           ls -ahltr
