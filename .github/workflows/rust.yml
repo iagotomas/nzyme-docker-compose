@@ -42,7 +42,7 @@ jobs:
         install: |
           case "${{ matrix.arch }}" in
             armv7*)
-              echo "deb-src https://deb.debian.org/debian buster main contrib non-free" > /etc/apt/sources.list.d/debian-src.list
+              echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main non-free contrib" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
               mkdir -p source/libpcap/source
