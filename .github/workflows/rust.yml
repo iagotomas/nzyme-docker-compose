@@ -40,14 +40,18 @@ jobs:
         dockerRunArgs: |
           --volume "${PWD}:/nzyme"
         install: |
-          apt-get update -q -y
-          apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
-          mkdir -p source/libpcap/source
-          cd source/libpcap/source
-          apt-get source libpcap0.8
-          ls -hatlr
-          cd libpcap-1.10.0
-          cat debian/control
+          case "${{ matrix.arch }}" in
+            armv7*)
+              apt-get update -q -y
+              apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
+              mkdir -p source/libpcap/source
+              cd source/libpcap/source
+              apt-get source libpcap0.8
+              ls -hatlr
+              cd libpcap-1.10.0
+              cat debian/control
+              ;;
+          esac
         run: |
           pwd
           ls -ahltr
