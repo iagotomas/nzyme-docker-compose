@@ -11,28 +11,20 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       name: Checkout Nzyme
       with:
         repository: nzymedefense/nzyme
     - name: Install libpcap
-      run: | 
-        wget https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz 
-        tar -xzvf libpcap-1.10.4.tar.gz
-    - name: Build libpcap
-      run: |     
-        ls -ahltr   
-        cd libpcap-1.10.4
-        ./configure
-        make
+      run: sudo apt install libpcap
     - name: Build
       run: |
         ls -ahltr
         cd tap 
-        LIBPCAP_LIBDIR="../libpcap-1.10.4" cargo build --verbose -r
+        cargo build --verbose -r
     - name: Run tests
-      run: cd tap ; cargo test --verbose
+      run: |
+        cd tap
+        cargo test --verbose
