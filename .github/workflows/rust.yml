@@ -28,7 +28,7 @@ jobs:
           --volume "${PWD}:/nzyme"
         install: |
           apt-get update -q -y
-          apt-get install -y libpcap0.8
+          apt-get install -y libpcap0.8 cargo
         run: |
           pwd
           ls -ahltr
