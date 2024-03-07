@@ -42,6 +42,7 @@ jobs:
         install: |
           case "${{ matrix.arch }}" in
             armv7*)
+              echo "deb-src http://deb.debian.org/debian buster main contrib non-free" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
               mkdir -p source/libpcap/source
@@ -50,6 +51,10 @@ jobs:
               ls -hatlr
               cd libpcap-1.10.0
               cat debian/control
+              apt-get build-dep .
+              dpkg-buildpackage -uc -us -b
+              cd ..
+              ls -ahltr
               ;;
           esac
         run: |
