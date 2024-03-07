@@ -17,17 +17,22 @@ jobs:
       name: Checkout Nzyme
       with:
         repository: nzymedefense/nzyme
-    - name: Install libpcap
-      run: sudo apt install libpcap0.8 libpcap0.8-dev
-    - name: Build
-      run: |
-        ls -ahltr
-        cd tap 
-        cargo build --verbose -r
-    - name: Run tests
-      run: |
-        cd tap
-        cargo test --verbose
+    
+    - uses: uraimo/run-on-arch-action@v2
+      name: Run commands
+      id: runcmd
+      with:
+        arch: armv7
+        distro: ubuntu22.04
+        dockerRunArgs: |
+          --volume "${PWD}:/nzyme"
+        install: |
+          apt install libpcap0.8
+        run: |
+          pwd
+          ls -ahltr
+          cd /nzyme/tap
+          cargo build --verbose -r
     - name: Upload nzyme-tap
       uses: actions/upload-artifact@v4
       with:
