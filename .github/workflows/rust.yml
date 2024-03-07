@@ -55,20 +55,20 @@ jobs:
               cd libpcap-1.9.1
               cat debian/control
               patch -p0 <<'EOF'
-              Index: debian/control
-              <+>UTF-8
-              ===================================================================
-              --- debian/control     (date 1487543450000)
-              +++ debian/control     (revision )
-              @@ -371,6 +371,7 @@
-                      // attribute values
-                      foreach (array_intersect_key($rowData, $this->_attributes) as $attributeCode => $value) {
-                          if ($newCustomer && !strlen($value)) {
-              +                               $entityRow[$attributeCode] = $value;
-                              continue;
-                          }
+                Index: debian/control
+                <+>UTF-8
+                ===================================================================
+                --- debian/control     (date 1487543450000)
+                +++ debian/control     (revision )
+                @@ -371,6 +371,7 @@
+                        // attribute values
+                        foreach (array_intersect_key($rowData, $this->_attributes) as $attributeCode => $value) {
+                            if ($newCustomer && !strlen($value)) {
+                +                               $entityRow[$attributeCode] = $value;
+                                continue;
+                            }
 
-              EOF
+                'EOF'
               apt-get build-dep -y .
               dpkg-buildpackage -uc -us -b
               cd ..
