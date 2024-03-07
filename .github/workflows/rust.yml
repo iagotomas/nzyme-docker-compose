@@ -23,8 +23,8 @@ jobs:
           #  distro: ubuntu22.04 
           - arch: armv7
             distro: ubuntu20.04
-          #- arch: armv7
-          #  distro: ubuntu22.04
+          - arch: armv7
+            distro: ubuntu22.04
     steps:
     - uses: actions/checkout@v3
       name: Checkout Nzyme
@@ -37,6 +37,9 @@ jobs:
       with:
         arch: ${{ matrix.arch }}
         distro: ${{ matrix.distro }}
+        # Not required, but speeds up builds by storing container images in
+        # a GitHub package registry.
+        githubToken: ${{ github.token }}
         dockerRunArgs: |
           --volume "${PWD}:/nzyme"
         install: |
@@ -49,13 +52,13 @@ jobs:
               cd source/libpcap/source
               apt-get source libpcap0.8
               ls -hatlr
-              cd libpcap-1.9.1
+              cd libpcap-1.10.4
               cat debian/control
               apt-get build-dep -y .
               dpkg-buildpackage -uc -us -b
               cd ..
               ls -ahltr
-              dpkg -i libpcap0.8_1.9.1-3_*.deb
+              dpkg -i libpcap0.8_1.10.4-4_*.deb
               ;;
           esac
         run: |
