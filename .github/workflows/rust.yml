@@ -42,14 +42,14 @@ jobs:
         install: |
           case "${{ matrix.arch }}" in
             armv7*)
-              echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main non-free contrib" > /etc/apt/sources.list.d/debian-src.list
+              echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
               mkdir -p source/libpcap/source
               cd source/libpcap/source
               apt-get source libpcap0.8
               ls -hatlr
-              cd libpcap-1.10.0
+              cd libpcap-1.9.1
               cat debian/control
               apt-get build-dep .
               dpkg-buildpackage -uc -us -b
