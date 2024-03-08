@@ -17,16 +17,16 @@ jobs:
     strategy:
       matrix:
         include:
-          #- arch: aarch64
-          #  distro: ubuntu20.04
-          #- arch: aarch64
-          #  distro: ubuntu22.04 
+          - arch: aarch64
+            distro: ubuntu20.04
+          - arch: aarch64
+            distro: ubuntu22.04 
           - arch: armv7
             distro: ubuntu20.04
           - arch: armv7
             distro: ubuntu22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout Nzyme
       with:
         repository: nzymedefense/nzyme
@@ -45,7 +45,7 @@ jobs:
         install: |
           case "${{ matrix.arch }}" in
             armv7*)
-              echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main" > /etc/apt/sources.list.d/debian-src.list
+              echo "deb-src http://ports.ubuntu.com/ubuntu-ports jammy main" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev libnl-3-dev libpcap0.8 libpcap0.8-dev
               ;;
