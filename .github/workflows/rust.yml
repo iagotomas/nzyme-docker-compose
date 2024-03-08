@@ -43,9 +43,8 @@ jobs:
         dockerRunArgs: |
           --volume "${PWD}:/nzyme"
         install: |
-          case "${{ matrix.arch }}" in
-            armv7*)
-              echo "deb-src http://ports.ubuntu.com/ubuntu-ports jammy main" > /etc/apt/sources.list.d/debian-src.list
+          case "${{ matrix.distro }}" in
+            ubuntu*)
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev libnl-3-dev libpcap0.8 libpcap0.8-dev
               ;;
