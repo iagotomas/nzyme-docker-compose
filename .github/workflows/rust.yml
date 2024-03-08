@@ -47,33 +47,7 @@ jobs:
             armv7*)
               echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
-              apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev
-              mkdir -p source/libpcap/source
-              cd source/libpcap/source
-              apt-get source libpcap0.8
-              ls -hatlr
-              cd libpcap-1.9.1
-              cat debian/control
-              patch -p0 << 'EOF'
-              Index: debian/control
-              <+>UTF-8
-              ===================================================================
-              --- debian/control     (date 1487543450000)
-              +++ debian/control     (revision )
-              @@ -371,6 +371,7 @@
-                      // attribute values
-                      foreach (array_intersect_key($rowData, $this->_attributes) as $attributeCode => $value) {
-                          if ($newCustomer && !strlen($value)) {
-              +                               $entityRow[$attributeCode] = $value;
-                              continue;
-                          }
-
-              EOF
-              apt-get build-dep -y .
-              dpkg-buildpackage -uc -us -b
-              cd ..
-              ls -ahltr
-              dpkg -i libpcap0.8_1.9.1-3_*.deb
+              apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev libnl-3-dev libpcap0.8 libpcap0.8-dev
               ;;
           esac
         run: |
