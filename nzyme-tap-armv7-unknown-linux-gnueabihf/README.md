@@ -113,3 +113,11 @@ while true; do
 done
 
 ```
+
+# Routing eth0 to wifi locally 
+
+```bash
+sudo iptables -I FORWARD 1 -i eth0 -o wlp0s20f3 -j ACCEPT
+sudo iptables -A FORWARD -i wlp0s20f3 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -t nat -I POSTROUTING 1 -s 192.168.1.0/24 -o wlp0s20f3 -j MASQUERADE
+```
