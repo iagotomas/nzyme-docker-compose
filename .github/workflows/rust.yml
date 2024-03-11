@@ -52,12 +52,12 @@ jobs:
               cd source/libpcap/source
               apt-get source -y libpcap0.8
               ls -hatlr
-              cd libpcap-1.10.0
+              cd libpcap-1.9.1
               export with_libnl=yes
               dpkg-buildpackage -uc -us -b
               cd ..
               ls -haltr
-              dpkg -i libpcap0.8_1.10.0-2_${{ matrix.arch }}.deb
+              dpkg -i libpcap0.8_1.9.1-3_${{ matrix.arch }}.deb
               ;;
           esac
         run: |
