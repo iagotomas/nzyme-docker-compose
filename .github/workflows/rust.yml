@@ -17,11 +17,13 @@ jobs:
     strategy:
       matrix:
         include:
+          # Debian port name: https://www.debian.org/ports/arm/
           #- arch: aarch64
           #  distro: ubuntu20.04
           #- arch: aarch64
           #  distro: ubuntu22.04 
           - arch: armv7
+            debian-port: armhf
             distro: ubuntu20.04
           #- arch: armv7
           #  distro: ubuntu22.04
@@ -57,7 +59,7 @@ jobs:
               dpkg-buildpackage -uc -us -b
               cd ..
               ls -haltr
-              dpkg -i libpcap0.8_1.9.1-3_${{ matrix.arch }}.deb
+              dpkg -i libpcap0.8_1.9.1-3_${{ matrix.debian-port }}.deb
               ;;
           esac
         run: |
@@ -65,8 +67,8 @@ jobs:
           ls -ahltr
           cd /nzyme/tap
           cargo build --verbose -r
-    - name: Upload nzyme-tap ${{ matrix.distro }} ${{ matrix.arch }}
+    - name: Upload nzyme-tap ${{ matrix.debian-port }} ${{ matrix.distro }}
       uses: actions/upload-artifact@v4
       with:
-        name: nzyme-tap-${{ matrix.arch }}-${{ matrix.distro }}
+        name: nzyme-tap-${{ matrix.debian-port }}-${{ matrix.distro }}
         path: tap/target/release/nzyme-tap
