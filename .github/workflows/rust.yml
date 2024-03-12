@@ -62,7 +62,7 @@ jobs:
               mkdir -p source/libpcap/source
               cd source/libpcap/source
               apt-get source -y libpcap0.8
-              read -r version build < <(apt-cache madison libpcap0.8|awk -F '|' '{print $2}'|awk -F'-' '{print $1, $2}')
+              read -r version build < <(apt info libpcap0.8|grep Version|awk '{print $2}'|awk -F'-' '{print $1, $2}')
               ls -hatlr
               cd libpcap-${version}
               export with_libnl=yes
