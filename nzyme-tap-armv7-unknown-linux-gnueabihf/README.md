@@ -19,6 +19,8 @@ Default Kali re4son linux libpcap does not provide a version built with libnl su
 >
 >cd libpcap-1.10.0
 >
+> **NOTE** Instead of editing debian/control file, simply use `export with_libnl=yes`
+>
 >`vim debian/control`
 >
 >Now we want to edit the debian/control file, and add a dependency to the **Build-Depends** line as well as the **Depends** of the libpcap0.8-dev Package. 

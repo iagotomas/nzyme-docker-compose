@@ -1,0 +1,15 @@
+general: {
+  name: ${NZYME_NODE_NAME}
+  database_path: "postgresql://${DB_HOST}:5432/nzyme?user=${DB_USERNAME}&password=${DB_PASSWORD}"
+  fetch_ouis: ${FETCH_OUIS}
+  data_directory: /usr/share/nzyme
+  plugin_directory: /usr/share/nzyme/plugins
+  crypto_directory: /usr/share/nzyme/crypto
+  ntp_server: ${NTP_SERVER}
+  versionchecks: ${VERSION_CHECKS}
+}
+
+interfaces: {
+  rest_listen_uri: "https://0.0.0.0:22900/"
+  http_external_uri: "https://${HOSTNAME}:22900/"
+}
