@@ -58,16 +58,16 @@ jobs:
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
               mkdir -p source/libpcap/source
               cd source/libpcap/source
-              apt search libpcap
-              apt-get source -y libpcap0.8=1.10.4-4
+              apt-get source -y libpcap0.8
               ls -hatlr
-              cd libpcap-1.10.4-4
+              cd libpcap-1.9.1
               export with_libnl=yes
               apt build-dep .
               dpkg-buildpackage -uc -us -b
               cd ..
               ls -haltr
-              dpkg -i libpcap0.8_1.10.4-4_${{ matrix.debian-port }}.deb
+              dpkg -i libpcap0.8_1.9.1-3_${{ matrix.debian-port }}.deb
+              dpkg -i libpcap0.8-dev_1.9.1-3_${{ matrix.debian-port }}.deb
               ;;
           esac
         run: |
