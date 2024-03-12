@@ -52,22 +52,23 @@ jobs:
           --volume "${PWD}:/nzyme"
         install: |
           case "${{ matrix.distro }}" in
-            ubuntu*)
+            ubuntu20*)
               echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
-              apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
+              apt-get install -y dpkg-dev build-essential awk grep cargo openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
               mkdir -p source/libpcap/source
               cd source/libpcap/source
               apt-get source -y libpcap0.8
+              read -r version build < <(apt-cache madison libpcap0.8|awk -F '|' '{print $2}'|awk -F'-' '{print $1, $2}')
               ls -hatlr
-              cd libpcap-1.9.1
+              cd libpcap-${version}
               export with_libnl=yes
               apt build-dep .
               dpkg-buildpackage -uc -us -b
               cd ..
               ls -haltr
-              dpkg -i libpcap0.8_1.9.1-3_${{ matrix.debian-port }}.deb
-              dpkg -i libpcap0.8-dev_1.9.1-3_${{ matrix.debian-port }}.deb
+              dpkg -i libpcap0.8_${version}-${build}_${{ matrix.debian-port }}.deb
+              dpkg -i libpcap0.8-dev_${version}-${build}_${{ matrix.debian-port }}.deb
               ;;
           esac
         run: |
