@@ -18,18 +18,18 @@ jobs:
       matrix:
         include:
           # Debian port name: https://www.debian.org/ports/arm/
-          - arch: aarch64
-            debian-port: arm64
-            distro: ubuntu20.04
-          - arch: aarch64
-            debian-port: arm64
-            distro: ubuntu22.04 
+          #- arch: aarch64
+          #  debian-port: arm64
+          #  distro: ubuntu20.04
+          #- arch: aarch64
+          #  debian-port: arm64
+          #  distro: ubuntu22.04 
           - arch: armv7
             debian-port: armhf
             distro: ubuntu20.04
-          - arch: armv7
-            debian-port: armhf
-            distro: ubuntu22.04
+          #- arch: armv7
+          #  debian-port: armhf
+          #  distro: ubuntu22.04
     steps:
     #- uses: actions/checkout@v4
     #  name: Checkout Nzyme-docker-compose
@@ -62,6 +62,8 @@ jobs:
               mkdir -p source/libpcap/source
               cd source/libpcap/source
               apt-get source -y libpcap0.8
+              apt info libpcap0.8
+              apt-cache showpkg libpcap0.8
               read -r version build < <(apt info libpcap0.8|grep Version|awk '{print $2}'|awk -F'-' '{print $1, $2}')
               ls -hatlr
               cd libpcap-${version}
@@ -75,8 +77,6 @@ jobs:
               ;;
           esac
         run: |
-          pwd
-          ls -ahltr
           cd /nzyme/tap
           cargo build --verbose -r
     - name: Upload nzyme-tap ${{ matrix.debian-port }} ${{ matrix.distro }}
