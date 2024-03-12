@@ -1,4 +1,4 @@
-name: Rust
+name: Rust nzyme-tap
 
 on:
   push:
@@ -18,30 +18,23 @@ jobs:
       matrix:
         include:
           # Debian port name: https://www.debian.org/ports/arm/
-          #- arch: aarch64
-          #  debian-port: arm64
-          #  distro: ubuntu20.04
-          #- arch: aarch64
-          #  debian-port: arm64
-          #  distro: ubuntu22.04 
+          - arch: aarch64
+            debian-port: arm64
+            distro: ubuntu20.04
+          - arch: aarch64
+            debian-port: arm64
+            distro: ubuntu22.04 
           - arch: armv7
             debian-port: armhf
             distro: ubuntu20.04
-          #- arch: armv7
-          #  debian-port: armhf
-          #  distro: ubuntu22.04
+          - arch: armv7
+            debian-port: armhf
+            distro: ubuntu22.04
     steps:
-    #- uses: actions/checkout@v4
-    #  name: Checkout Nzyme-docker-compose
-    #  with:
-    #    repository: iagotomas/nzyme
-    #    sparse-checkout: |
-    #      libpcap0.8-dev_99_all.deb
     - uses: actions/checkout@v4
       name: Checkout Nzyme
       with:
         repository: iagotomas/nzyme
-    
     - uses: uraimo/run-on-arch-action@v2
       name: Run commands
       id: runcmd
@@ -62,16 +55,12 @@ jobs:
               mkdir -p source/libpcap/source
               cd source/libpcap/source
               apt-get source -y libpcap0.8
-              apt info libpcap0.8
-              apt-cache showpkg libpcap0.8
               read -r version build < <(apt info libpcap0.8|grep Version|awk '{print $2}'|awk -F'-' '{print $1, $2}')
-              ls -hatlr
               cd libpcap-${version}
               export with_libnl=yes
               apt build-dep .
               dpkg-buildpackage -uc -us -b
               cd ..
-              ls -haltr
               dpkg -i libpcap0.8_${version}-${build}_${{ matrix.debian-port }}.deb
               dpkg -i libpcap0.8-dev_${version}-${build}_${{ matrix.debian-port }}.deb
               ;;
