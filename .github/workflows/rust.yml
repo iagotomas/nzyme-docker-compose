@@ -58,7 +58,7 @@ jobs:
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
               mkdir -p source/libpcap/source
               cd source/libpcap/source
-              apt-get search libpcap
+              apt search libpcap
               apt-get source -y libpcap0.8=1.10.4-4
               ls -hatlr
               cd libpcap-1.10.4-4
