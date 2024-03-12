@@ -18,15 +18,18 @@ jobs:
       matrix:
         include:
           # Debian port name: https://www.debian.org/ports/arm/
-          #- arch: aarch64
-          #  distro: ubuntu20.04
-          #- arch: aarch64
-          #  distro: ubuntu22.04 
+          - arch: aarch64
+            debian-port: arm64
+            distro: ubuntu20.04
+          - arch: aarch64
+            debian-port: arm64
+            distro: ubuntu22.04 
           - arch: armv7
             debian-port: armhf
             distro: ubuntu20.04
-          #- arch: armv7
-          #  distro: ubuntu22.04
+          - arch: armv7
+            debian-port: armhf
+            distro: ubuntu22.04
     steps:
     #- uses: actions/checkout@v4
     #  name: Checkout Nzyme-docker-compose
@@ -52,7 +55,7 @@ jobs:
           --volume "${PWD}:/nzyme"
         install: |
           case "${{ matrix.distro }}" in
-            ubuntu20*)
+            ubuntu*)
               echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential awk grep cargo openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
