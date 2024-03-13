@@ -58,7 +58,6 @@ jobs:
               apt install -q -y dpkg-dev build-essential openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
               curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal -y
               . "$HOME/.cargo/env"
-              rustup update
               mkdir -p source/libpcap/source
               cd source/libpcap/source
               apt source -q -y libpcap0.8
