@@ -56,7 +56,7 @@ jobs:
               echo "deb-src http://ports.ubuntu.com/ubuntu-ports ${{matrix.codename}} main" > /etc/apt/sources.list.d/debian-src.list
               apt update -q -y
               apt install -q -y dpkg-dev build-essential openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
-              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal
+              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal -y
               rustup update
               mkdir -p source/libpcap/source
               cd source/libpcap/source
