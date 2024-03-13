@@ -21,15 +21,19 @@ jobs:
           - arch: aarch64
             debian-port: arm64
             distro: ubuntu20.04
+            codename: focal
           - arch: aarch64
             debian-port: arm64
             distro: ubuntu22.04 
+            codename: jammy
           - arch: armv7
             debian-port: armhf
             distro: ubuntu20.04
+            codename: focal
           - arch: armv7
             debian-port: armhf
             distro: ubuntu22.04
+            codename: jammy
     steps:
     - uses: actions/checkout@v4
       name: Checkout Nzyme
@@ -49,7 +53,7 @@ jobs:
         install: |
           case "${{ matrix.distro }}" in
             ubuntu*)
-              echo "deb-src http://ports.ubuntu.com/ubuntu-ports focal main" > /etc/apt/sources.list.d/debian-src.list
+              echo "deb-src http://ports.ubuntu.com/ubuntu-ports ${{matrix.codename}} main" > /etc/apt/sources.list.d/debian-src.list
               apt-get update -q -y
               apt-get install -y dpkg-dev build-essential cargo openssl librust-openssl-dev libnl-genl-3-dev dh-autoreconf flex libbluetooth-dev autotools-dev bison debhelper
               mkdir -p source/libpcap/source
