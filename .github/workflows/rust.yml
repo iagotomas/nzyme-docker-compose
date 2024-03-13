@@ -18,22 +18,22 @@ jobs:
       matrix:
         include:
           # Debian port name: https://www.debian.org/ports/arm/
-          - arch: aarch64
-            debian-port: arm64
-            distro: ubuntu20.04
-            codename: focal
-          - arch: aarch64
-            debian-port: arm64
-            distro: ubuntu22.04 
-            codename: jammy
+          #- arch: aarch64
+          #  debian-port: arm64
+          #  distro: ubuntu20.04
+          #  codename: focal
+          #- arch: aarch64
+          #  debian-port: arm64
+          #  distro: ubuntu22.04 
+          #  codename: jammy
           - arch: armv7
             debian-port: armhf
             distro: ubuntu20.04
             codename: focal
-          - arch: armv7
-            debian-port: armhf
-            distro: ubuntu22.04
-            codename: jammy
+          #- arch: armv7
+          #  debian-port: armhf
+          #  distro: ubuntu22.04
+          #  codename: jammy
     steps:
     - uses: actions/checkout@v4
       name: Checkout Nzyme
