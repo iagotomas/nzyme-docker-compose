@@ -68,8 +68,8 @@ jobs:
         run: |
           cd /nzyme/tap
           cargo build --verbose -r
-    - name: Upload nzyme-tap ${{ matrix.debian-port }} ${{ matrix.distro }}
+    - name: Upload nzyme-tap ${{ matrix.distro }} ${{ matrix.debian-port }} 
       uses: actions/upload-artifact@v4
       with:
-        name: nzyme-tap-${{ matrix.debian-port }}-${{ matrix.distro }}
+        name: nzyme-tap-${{ matrix.distro }}-${{ matrix.debian-port }}
         path: tap/target/release/nzyme-tap
