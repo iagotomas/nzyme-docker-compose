@@ -4,6 +4,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - NZYME_NODE_NAME=nzyme-node-01
+      - NZYME_DB_HOST=postgres
+      - NZYME_DB_USERNAME=nzyme
+      - NZYME_DB_PASSWORD=nzyme
+      - NZYME_HOSTNAME=localhost
+      - NZYME_PORT=22900
     ports:
       - 22900:22900
     networks:
