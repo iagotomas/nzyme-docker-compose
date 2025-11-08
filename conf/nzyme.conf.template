@@ -13,3 +13,24 @@ interfaces: {
   rest_listen_uri: "https://0.0.0.0:${NZYME_PORT}/"
   http_external_uri: "https://${NZYME_HOSTNAME}:${NZYME_PORT}/"
 }
+
+# Performance tuning.
+performance: {
+  # How many threads work on processing incoming tap reports.
+  report_processor_pool_size: 3
+}
+
+protocols: {
+    tcp: {
+      session_timeout_seconds: 43200
+    }
+}
+
+# Miscellaneous.
+misc: {
+  # Custom web interface browser title.
+  #custom_title: "nzyme - Network Defense System"
+
+  # URL to a custom favicon.
+  #custom_favicon_url: "https://example.org/favicon.png"
+}
