@@ -23,7 +23,7 @@ services:
       resources:
         limits:
           memory: 512M
-          cpus: '0.6'
+          cpus: '1'
     depends_on:
       - postgres
   postgres:
@@ -34,7 +34,7 @@ services:
       resources:
         limits:
           memory: 256M
-          cpus: '0.4'
+          cpus: '0.5'
     environment:
       - POSTGRES_PASSWORD=nzyme
       - POSTGRES_USER=nzyme
